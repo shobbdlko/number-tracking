@@ -105,7 +105,7 @@
       const tableBody = document.getElementById('locations-table-body');
       
       try {
-        const response = await fetch('/api/view-locations');
+        const response = await fetch('https://your-backend-app.onrender.com/api/view-locations');
         const data = await response.json();
 
         if (!data || data.length === 0) {
