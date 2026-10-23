@@ -54,3 +54,8 @@ app.post('/api/save-location', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+// यह वह एंडपॉइंट है जिससे एडमिन डैशबोर्ड सभी लोकेशन्स मंगवाएगा
+app.get('/api/view-locations', (req, res) => {
+  // savedLocations वह एरे है जहाँ आपने लोकेशन स्टोर की हैं
+  res.status(200).json(savedLocations);
+});
