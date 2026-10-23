@@ -93,11 +93,11 @@
           };
 
           try {
-            const res = await fetch('/api/save-location', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
+const res = await fetch('https://number-tracking.onrender.com/api/save-location', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload)
+});
 
             const data = await res.json();
 
