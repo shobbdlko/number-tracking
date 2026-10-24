@@ -8,17 +8,25 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json()); // JSON डेटा पढ़ने के लिए
-app.use(cors());         // GitHub Pages से आने वाली रिक्वेस्ट को अनुमति देने के लिए
+app.use(cors());         // सभी डोमेन से रिक्वेस्ट की अनुमति देने के लिए
 
-// डेटा को स्टोर करने के लिए अस्थायी एरे (बाद में आप MongoDB या SQL जोड़ सकते हैं)
+// डेटा को स्टोर करने के लिए अस्थायी एरे
 const savedLocations = [];
 
-// 1. टेस्ट करने के लिए रूट राउट (जब आप सर्वर का लिंक ब्राउज़र में खोलेंगे)
+// 1. रूट राउट (सर्वर चेक करने के लिए)
 app.get('/', (req, res) => {
   res.send('Location Server is running successfully!');
 });
 
-// 2. POST Endpoint जो GitHub Pages वाले फ्रंटएंड से लोकेशन डेटा रिसीव करेगा
+// 2. सेव की गई सभी लोकेशन देखने के लिए GET Endpoint
+app.get('/api/locations', (req, res) => {
+  res.status(200).json({
+    total: savedLocations.length,
+    data: savedLocations
+  });
+});
+
+// 3. POST Endpoint जो फ्रंटएंड से लोकेशन डेटा रिसीव करेगा
 app.post('/api/save-location', (req, res) => {
   const { userId, latitude, longitude, accuracy, timestamp } = req.body;
 
@@ -50,7 +58,7 @@ app.post('/api/save-location', (req, res) => {
   });
 });
 
-// सर्वर को स्टार्ट करें
+// सर्वर को start करें
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
