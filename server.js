@@ -18,12 +18,9 @@ app.get('/', (req, res) => {
   res.send('Location Server is running successfully!');
 });
 
-// 2. सेव की गई सभी लोकेशन देखने के लिए GET Endpoint
-app.get('/api/locations', (req, res) => {
-  res.status(200).json({
-    total: savedLocations.length,
-    data: savedLocations
-  });
+// 2. Admin Dashboard के लिए GET Endpoint (सीधे savedLocations ऐरे रिटर्न करेगा)
+app.get('/api/view-locations', (req, res) => {
+  res.status(200).json(savedLocations);
 });
 
 // 3. POST Endpoint जो फ्रंटएंड से लोकेशन डेटा रिसीव करेगा
